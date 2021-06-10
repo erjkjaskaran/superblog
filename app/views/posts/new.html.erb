@@ -1,0 +1,12 @@
+<h1>Create Posts</h1>
+<br/>
+<% if @post.errors.any? %>
+	<p>The Post cannot be created due to:</p>
+	<ul> 
+		<% @post.errors.full_messages.each do |msg| %>
+		<li><%= msg %> </li>
+		<% end %>
+	</ul>
+<% end %>
+<br/>
+<%= render '/posts/postform' %>

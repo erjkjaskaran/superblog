@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding: 0 0">
+  <div class="row container-fluid">
+    <div class="col-sm float-left">
+      <%= link_to image_tag("blog.png",:size=>"70x50"), root_path, class:'navbar-brand' %>
+    </div>
+    <div class="col-md-4 justify-content-center">
+      <form class="form-inline md-form form-sm mt-0">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+      </form>
+
+    </div>
+    <div class="col-sm float-right">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="nav collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <%= link_to 'Friend', friends_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="post" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="post">
+            <%= link_to 'Create Post', new_post_path, class:"dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Show Posts', posts_path, class:"dropdown-item" %>
+          </div>
+          
+        </li>
+        <li class="nav-item active">
+          <%= link_to 'Log In', users_sign_in_path, class:"nav-link" %>
+        </li>
+        
+        
+      </ul>
+    </div>
+    </div>
+  </div>
+ 
+</nav>
