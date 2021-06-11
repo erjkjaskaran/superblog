@@ -1,57 +1,39 @@
 class FriendsController < ApplicationController
-efore_action :set_params, only: [:edit,:show,:update,:destroy]
-
-	def new
-		@post=Post.new
+	before_action :set_params, only: [:show,:destroy]
+	def index
+		@friend=Friend.all
 	end
-
+	def new
+		@friend=Friend.new
+	end
 	def create
-		#render plain: params[:post].inspect
-		@post=Post.new(post_params)
-		if @post.save
-			flash[:notice]="Post created Succesfully"
+		@friend=Friend.new(friend_params)
+		if @friend.save
+			flash[:notice]="Friend created Succesfully"
 			redirect_to root_path(@post)
 		else
 			render 'new'
 		end
 	end
 
-	def home
-		redirect_to root_path(@post)
-	end
-
-	def index	
-		@post=Post.all
-	end
-
-	def edit
+	def destroy
+		if @friend.destroy
+			flash[:notice]="Friend Deleted Succesfully"
+			redirect_to friends_path(@friend)
+		end
 	end
 
 	def show
 	end
 
-	def update
-		if @post.update(post_params)
-			flash[:notice]="Post Succesfully Updated"
-			redirect_to root_path
-		else
-			render 'edit'
-		end
-	end
-
-	def destroy
-		if @post.destroy
-			flash[:notice]="Post Succesfully Deleted"
-			redirect_to root_path
-		end
-	end
-
 	private
-		def set_params
-			@post=Post.find(params[:id])
+		def friend_params()
+			params.require(:friend).permit(:first_name,:last_name,:email,:phone_number)
 		end
-		def post_params
-			params.require(:post).permit(:title, :description)
+		def set_params()
+			@friend=Friend.find(params[:id])
 		end
+
+
 
 end

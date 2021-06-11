@@ -1,12 +1,18 @@
 <h1>Create Posts</h1>
 <br/>
 <% if @post.errors.any? %>
-	<p>The Post cannot be created due to:</p>
-	<ul> 
+	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>The Post cannot be created due to:</strong> <br/>
+  <ul> 
 		<% @post.errors.full_messages.each do |msg| %>
 		<li><%= msg %> </li>
 		<% end %>
 	</ul>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
 <% end %>
 <br/>
 <%= render '/posts/postform' %>

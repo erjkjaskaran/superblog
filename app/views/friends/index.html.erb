@@ -1,1 +1,15 @@
 <h1> Friend List</h1>
+<% @friend.each do |friend| %>
+	<br/>
+<div class="jumbotron" style="padding: 1rem 2rem; ">
+  <h3 class="display-5"><%= friend.first_name %><%= friend.last_name %></h3>
+  <hr class="my-2">
+  <p><%= friend.email %></p><br/>
+  <p><%= friend.phone_number %></p>
+  <p class="lead" style="font-size: 1rem;">
+  	<%= link_to 'Show Friend', friend_path(friend.id)%>&nbsp&nbsp
+  	<%= link_to 'Edit Friend', edit_friend_path(friend.id)%>&nbsp&nbsp
+    <%= link_to 'Delete Friend', friend_path(friend.id), method: :delete, data: {confirm: "Are you Sure?"}%>
+  </p>
+</div>
+<%end%>

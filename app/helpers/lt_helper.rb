@@ -1,0 +1,2 @@
+module LtHelper
+end
