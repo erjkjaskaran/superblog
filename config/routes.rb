@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :users
-  resources :friends,:posts
+  resources :friends,:posts, :users, :comments
   get 'home/index'
   get 'users/sign_in'
   post 'lt/leantechnologies/:data', to: 'lt#leantechnologies'

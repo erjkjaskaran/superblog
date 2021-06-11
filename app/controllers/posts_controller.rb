@@ -8,6 +8,7 @@ before_action :set_params, only: [:edit,:show,:update,:destroy]
 	def create
 		#render plain: params[:post].inspect
 		@post=Post.new(post_params)
+		@post.user=User.first
 		if @post.save
 			flash[:notice]="Post created Succesfully"
 			redirect_to root_path(@post)
