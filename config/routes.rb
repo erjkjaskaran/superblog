@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :users
   resources :friends,:posts
   get 'home/index'
   get 'users/sign_in'
