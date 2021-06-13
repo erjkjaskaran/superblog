@@ -5,7 +5,13 @@
   <h3 class="display-5"><%= post.title %></h3>
   <hr class="my-2">
   <p><%= post.description %></p>
-  <p class="lead" style="font-size: 1rem;">
+  <small>By:
+    <%= post.user.username %>,
+    <%= time_ago_in_words(post.created_at) %>,
+    last updated:
+    <%= time_ago_in_words(post.updated_at) if post.updated_at?%>
+  </small>
+  <p class="lead border-top" style="font-size: 1rem;">
   	<%= link_to 'Show Post', post_path(post.id)%>&nbsp&nbsp
   	<%= link_to 'Edit Post', edit_post_path(post.id)%>&nbsp&nbsp
     <%= link_to 'Delete Post', post_path(post.id), method: :delete, data: {confirm: "Are you Sure?"}%>
