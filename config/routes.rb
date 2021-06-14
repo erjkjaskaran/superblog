@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :friends,:posts, :users, :comments
   get 'home/index'
   get 'users/sign_in'
+  get 'sign_up', to: 'users#new'
   post 'lt/leantechnologies/:data', to: 'lt#leantechnologies'
   post 'lt/leantechnologies', to: 'lt#leantechnologies'
   root 'posts#index'
