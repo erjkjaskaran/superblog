@@ -1,6 +1,7 @@
-<%= form_with(model: user) do |form| %>
+
+<%= form_for @user do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation" alert alert-danger alert-dismissible fade show" role="alert">
+    <div id="error_explanation" class="alert alert-danger alert-dismissible fade show" role="alert">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
@@ -8,6 +9,9 @@
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
   <% end %>
 
@@ -28,8 +32,16 @@
       </div>
   </div>
 
+  <div class="mb-3 justify-content-center">
+    <%= form.label :password %>
+    <%= form.password_field :password, class:'form-control is-valid', :required=>true %>
+    <div class="invalid-feedback">
+          Please enter password.
+      </div>
+  </div>
+
   <div class="actions justify-content-center">
-    <%= form.submit 'Sign Up', class:"btn btn-primary btn-block" %>
+    <%= form.submit(@user.new_record? ? "Sign Up" : "Update Account", class:"btn btn-primary btn-block") %>
   </div>
 </div>
 <% end %>

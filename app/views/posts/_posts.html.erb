@@ -1,0 +1,22 @@
+<% obj.each do |post| %>
+	<br/>
+<div class="jumbotron" style="padding: 1rem 2rem; ">
+  <h3 class="display-5"><%= link_to post.title, post_path(post.id)%></h3>
+  <hr class="my-2">
+  <p><%= post.description %></p>
+  <small>By:
+    <%= post.user.username %>,
+    <%= time_ago_in_words(post.created_at) %>,
+    last updated:
+    <%= time_ago_in_words(post.updated_at) if post.updated_at?%>
+  </small>
+  
+  <% if session[:user_id]==post.user.id %>
+  <p class="lead border-top" style="font-size: 1rem;">
+  	<%= link_to 'Show Post', post_path(post.id)%>&nbsp&nbsp
+  	<%= link_to 'Edit Post', edit_post_path(post.id)%>&nbsp&nbsp
+    <%= link_to 'Delete Post', post_path(post.id), method: :delete, data: {confirm: "Are you Sure?"}%>
+  </p>
+  <% end %>
+</div>
+<%end%>
