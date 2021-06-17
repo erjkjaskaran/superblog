@@ -24,7 +24,7 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 	end
 
 	def index	
-		@post=Post.all
+		@post=Post.paginate(page: params[:page],per_page:10)
 	end
 
 	def edit
@@ -57,7 +57,7 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 			params.require(:post).permit(:title, :description)
 		end
 		def require_same_user
-			if current_user!=@post.user
+			if current_user!=@post.user and !current_user.admin?
 				flash[:danger]="You are not authorized to perform this action"
 				redirect_to root_path
 			end

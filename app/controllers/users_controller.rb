@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_user, except: [:new, :create]
+  before_action :require_same_user, only: [:edit, :update,:show]
+  before_action :isadmin?, only: [:destroy, :index]
   
   # GET /users or /users.json
   def index
@@ -25,7 +28,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: "User was successfully created." }
+        session[:user_id]=@user.id
+        format.html { redirect_to root_path, notice: "User was successfully created." }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,5 +69,19 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:username, :email,:password)
+    end
+
+    def require_same_user
+      if current_user!=@user
+        flash[:danger]="You are not authorized to perform this action"
+        redirect_to root_path
+      end
+    end
+
+    def isadmin?
+      if !current_user.admin
+        flash[:danger]="You are not authorized to perform this action"
+        redirect_to root_path
+      end
     end
 end
