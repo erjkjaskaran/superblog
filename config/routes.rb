@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'sign_in', to: 'sessions#new'
   post 'sign_in', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+  get 'user/posts', to: 'posts#user'
   get 'sign_up', to: 'users#new'
   post 'lt/leantechnologies/:data', to: 'lt#leantechnologies'
   post 'lt/leantechnologies', to: 'lt#leantechnologies'

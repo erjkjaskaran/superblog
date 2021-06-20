@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :require_user, except: [:new, :create]
-  before_action :require_same_user, only: [:edit, :update,:show]
   before_action :isadmin?, only: [:destroy, :index]
+  before_action :require_same_user, only: [:edit, :update,:show]
+  
   
   # GET /users or /users.json
   def index
@@ -72,7 +73,7 @@ class UsersController < ApplicationController
     end
 
     def require_same_user
-      if current_user!=@user
+      if (current_user!=@user) && !current_user.admin
         flash[:danger]="You are not authorized to perform this action"
         redirect_to root_path
       end

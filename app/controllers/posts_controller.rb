@@ -1,10 +1,14 @@
 class PostsController < ApplicationController
 before_action :set_params, only: [:edit,:show,:update,:destroy]
-before_action :require_user, except: [:index, :show] 
+before_action :require_user, except: [:index, :show,:user] 
 before_action :require_same_user, only: [:edit, :update,:delete]
 
 	def new
 		@post=Post.new
+	end
+
+	def user
+		@post=current_user.posts.paginate(page: params[:page],per_page:10)
 	end
 
 	def create
@@ -57,7 +61,7 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 			params.require(:post).permit(:title, :description)
 		end
 		def require_same_user
-			if current_user!=@post.user and !current_user.admin?
+			if current_user!=@post.user && !current_user.admin?
 				flash[:danger]="You are not authorized to perform this action"
 				redirect_to root_path
 			end

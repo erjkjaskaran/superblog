@@ -18,10 +18,15 @@
       </button>
     <div class="nav collapse navbar-collapse justify-content-end" id="navbarNav" aria-labelledby="Toggle navigation">
       <ul class="navbar-nav float-right">
-        <li class="nav-item active">
-          <%= link_to 'Friend', friends_path, class:"nav-link" %>
+        <% if current_user.admin? %>
+          <li class="nav-item active">
+          <%= link_to 'Users', users_path, class:"nav-link" %>
         </li>
-        <li class="nav-item dropdown">
+        <% end %>
+        <li class="nav-item active">
+          <%= link_to 'Friends', friends_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="post" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="post">
             <%= link_to 'Create Post', new_post_path, class:"dropdown-item" %>
@@ -30,11 +35,16 @@
           </div>
           
         </li>
-        <li class="nav-item active">
-          <%= link_to 'Log Out', logout_path,method: :delete , class:"nav-link" %>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="user" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.username%><%=image_tag("blog.png",size:"30x30",class:"img-circle")%></a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user">
+            <%= link_to 'Profile', user_path(session[:user_id]), class:"dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Show my Posts', user_posts_path, class:"dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Log Out', logout_path,method: :delete, class:"dropdown-item" %>
+            </div>
         </li>
-        
-        
       </ul>
     </div>
     <% else %>
