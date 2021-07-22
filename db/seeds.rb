@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+label=['a','b','c']
+state=['State A','State B','State C']
+@states=[label,state]
+@states.each_with_index do |s,index|
+	s.each do 
+  State.find_or_create_by(label: @states[index][], state_name: @states[1][index], country: "USA")
+end

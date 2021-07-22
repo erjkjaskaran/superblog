@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		if user && user.authenticate(params[:session][:password])
 			flash[:success]="Succesfully Logged In"
 			session[:user_id]=user.id
-			redirect_to posts_path
+			redirect_to user_posts_path
 
 		else
 			flash.now[:danger]="Please check Email or Password"

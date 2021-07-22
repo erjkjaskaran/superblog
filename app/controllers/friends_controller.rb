@@ -22,6 +22,8 @@ class FriendsController < ApplicationController
 			redirect_to friends_path(@friend)
 		end
 	end
+	def form
+	end
 
 	def show
 	end

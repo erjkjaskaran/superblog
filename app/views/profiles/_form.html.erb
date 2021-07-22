@@ -1,0 +1,46 @@
+<%= form_for @profile do |form| %>
+<%= hidden_field_tag 'authenticity_token', form_authenticity_token %>
+<div class="row">
+	<div class="col-sm-3 justify-content-center">
+		<%= image_tag('blog.png',size: '200x200', class:"rounded-circle") %>
+	</div>
+	
+	<div class="col">
+		<div class="row col-sm-8 justify-content-center">
+			<h3 align="center">Update Profile</h3>
+		</div>
+		
+		<div class="row col-sm-8">
+			<div class="row mb-3 col">
+			    <%= form.label :first_name %><br/>
+			    <%= form.text_field :first_name, class:'form-control is-valid', :required=>true%>
+			      <div class="invalid-feedback">
+			          Please enter First Name.
+			      </div>
+			</div>
+			&nbsp&nbsp
+			<div class="row mb-3 col">
+			    <%= form.label :last_name %>
+			    <%= form.text_field :last_name, class:'form-control is-valid', :required=>true %>
+			    <div class="invalid-feedback">
+			          Please enter Last Name.
+			    </div>
+			</div>
+		</div>
+
+		<div class="row mb-3 col-sm-8">
+		    <%= form.label :address%>
+		    <%= form.text_area :address, row: 2, class:'form-control is-valid', :required=>true %>
+		</div>
+
+		<div class="row mb-3 col-sm-8">
+		    <%= form.label :phone_number%>
+		    <%= form.text_field :phone_number, class:'form-control is-valid', :required=>true %>
+		</div>
+
+		<div class="row col-sm-8 actions justify-content-end">
+		    <%= form.submit "Update" , class:"btn btn-primary btn-block" %>
+		</div>		
+	</div>
+</div>
+<% end %>

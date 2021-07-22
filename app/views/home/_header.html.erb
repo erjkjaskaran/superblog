@@ -4,9 +4,10 @@
       <%= link_to image_tag("blog.png",:size=>"70x50"), root_path, class:'navbar-brand' %><hidden><strong style="font-size:30px;">SuperBlog</strong></hidden>
     </div>
     <div class="col-md-4 justify-content-center">
-      <form class="form-inline md-form form-sm mt-0">
+      <form autocomplete=off class="form-inline md-form form-sm mt-0" method="get" action="/search">
         <i class="fas fa-search" aria-hidden="true"></i>
-        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
+        <%= text_field :q, params[:q], class: "form-control form-control-sm ml-3 w-75", placeholder: "Search" %>
+        
       </form>
 
     </div>
@@ -18,10 +19,18 @@
       </button>
     <div class="nav collapse navbar-collapse justify-content-end" id="navbarNav" aria-labelledby="Toggle navigation">
       <ul class="navbar-nav float-right">
-        <li class="nav-item active">
-          <%= link_to 'Friend', friends_path, class:"nav-link" %>
+        <% if current_user.admin? %>
+          <li class="nav-item active">
+          <%= link_to 'Users', users_path, class:"nav-link" %>
         </li>
-        <li class="nav-item dropdown">
+        <% end %>
+        <li class="nav-item active">
+          <%= link_to 'Messages', messages_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item active">
+          <%= link_to 'Friends', friends_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item dropdown active">
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="post" role="button" aria-haspopup="true" aria-expanded="false">Posts</a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="post">
             <%= link_to 'Create Post', new_post_path, class:"dropdown-item" %>
@@ -30,11 +39,16 @@
           </div>
           
         </li>
-        <li class="nav-item active">
-          <%= link_to 'Log Out', logout_path,method: :delete , class:"nav-link" %>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="user" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.username.capitalize%><%=image_tag("blog.png",size:"30x30",class:"img-circle")%></a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user">
+            <%= link_to 'Profile', user_profile_path, class:"dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Show my Posts', user_posts_path, class:"dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <%= link_to 'Log Out', logout_path,method: :delete, class:"dropdown-item" %>
+            </div>
         </li>
-        
-        
       </ul>
     </div>
     <% else %>
