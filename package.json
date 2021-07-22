@@ -10,8 +10,11 @@
     "cropperjs": "^1.5.12",
     "jquery": "^3.6.0",
     "jquery-cropper": "^1.0.1",
+<<<<<<< HEAD
     "popper.js": "^1.16.1",
     "stimulus": "^2.0.0",
+=======
+>>>>>>> 1889c70ee041c499340c22232d1603ec56577a4d
     "turbolinks": "^5.2.0",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
