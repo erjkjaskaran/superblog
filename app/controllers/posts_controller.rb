@@ -28,13 +28,7 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 	end
 
 	def index
-		search=params[:q]
-		if search.present?
-	      @post=Post.search(search)
-	      debugger
-	    else
-	      @post=Post.all
-	    end
+		@post=Post.all
 		@post=@post.paginate(page: params[:page],per_page:10)
 	end
 
