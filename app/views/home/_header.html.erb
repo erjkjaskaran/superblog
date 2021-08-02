@@ -24,12 +24,9 @@
           <%= link_to 'Users', users_path, class:"nav-link" %>
         </li>
         <% end %>
-<<<<<<< HEAD
         <li class="nav-item active">
           <%= link_to 'Messages', messages_path, class:"nav-link" %>
         </li>
-=======
->>>>>>> 1889c70ee041c499340c22232d1603ec56577a4d
         <li class="nav-item active">
           <%= link_to 'Friends', friends_path, class:"nav-link" %>
         </li>
@@ -43,15 +40,9 @@
           
         </li>
         <li class="nav-item dropdown active">
-<<<<<<< HEAD
           <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="user" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.username.capitalize%><%=image_tag("blog.png",size:"30x30",class:"img-circle")%></a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user">
             <%= link_to 'Profile', user_profile_path, class:"dropdown-item" %>
-=======
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="user" role="button" aria-haspopup="true" aria-expanded="false"><%=current_user.username%><%=image_tag("blog.png",size:"30x30",class:"img-circle")%></a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="user">
-            <%= link_to 'Profile', user_path(session[:user_id]), class:"dropdown-item" %>
->>>>>>> 1889c70ee041c499340c22232d1603ec56577a4d
             <div class="dropdown-divider"></div>
             <%= link_to 'Show my Posts', user_posts_path, class:"dropdown-item" %>
             <div class="dropdown-divider"></div>
