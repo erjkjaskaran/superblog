@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 before_action :set_params, only: [:edit,:show,:update,:destroy]
-before_action :require_user, except: [:index, :show,:user] 
+before_action :require_user, except: [:index, :show,:user, :mailer] 
 before_action :require_same_user, only: [:edit, :update,:delete]
 
 	def new
@@ -53,6 +53,16 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 			redirect_to root_path
 		end
 	end
+
+	def mailer
+		@post=Post.new
+        @post.title="Jaskaran"
+		@post.user=@current_user
+        @post.description="erjk@gmail.com"
+		if @post.save
+        	OrdermailMailer.with(post: @post).new_order_email.deliver_later
+		end
+    end
 
 	private
 		def set_params
