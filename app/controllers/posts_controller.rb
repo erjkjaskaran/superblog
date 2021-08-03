@@ -56,11 +56,16 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 
 	def mailer
 		@post=Post.new
-        @post.title="Jaskaran"
-		@post.user=@current_user
-        @post.description="erjk@gmail.com"
+        @post.title="final2"
+		@post.user=User.first
+        @post.description="erjkjaskaran@gmail.com"
 		if @post.save
         	OrdermailMailer.with(post: @post).new_order_email.deliver_later
+			flash[:success]="Mail Sent"
+			redirect_to root_path
+		else
+			flash[:danger]="Unsuccessful"
+			redirect_to root_path
 		end
     end
 
