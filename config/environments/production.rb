@@ -102,16 +102,16 @@ Rails.application.configure do
   host = 'superblog.herokuapp.com' #replace with your own url
   config.action_mailer.default_url_options = { host: host, :protocol => 'https' }
 
-  # SMTP settings for gmail
+  # SMTP settings for mailtrap
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => 'smtp.sendgrid.net',
-    :port => '587',
-    :user_name => ENV['SENDGRID_USERNAME'],
-    :password => ENV['SENDGRID_PASSWORD'],
-    :authentication => :plain,
-    :domain => 'heroku.com',
-    :enable_starttls_auto => true
-}
+    :user_name => '2d9671a663d5e0',
+    :password => 'bc52f395622849',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
+  }
 
   # Inserts middleware to perform automatic connection switching.
   # The `database_selector` hash is used to pass options to the DatabaseSelector
