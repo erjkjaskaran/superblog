@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 before_action :set_params, only: [:edit,:show,:update,:destroy]
+#before_action :set_order_params, only: [:order]
 before_action :require_user, except: [:index, :show,:user, :mailer] 
 before_action :require_same_user, only: [:edit, :update,:delete]
 
@@ -9,6 +10,18 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 
 	def user
 		@post=current_user.posts.paginate(page: params[:page],per_page:10)
+	end
+
+	def order
+		@order=Order.new(post_order_params)
+		@order.user=@current_user
+		if @order.save
+			OrdermailMailer.with(post: @order).new_order_email.deliver_later
+			redirect_to root_path(@post)
+		else
+			flash[:danger]="Unsuccessful"
+			redirect_to root_path
+		end
 	end
 
 	def create
@@ -37,6 +50,7 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 	end
 
 	def show
+		@order=Order.new
 	end
 
 	def update
@@ -58,6 +72,9 @@ before_action :require_same_user, only: [:edit, :update,:delete]
 	
 
 	private
+		def post_order_params
+			params.permit(:qty)
+		end
 		def set_params
 			@post=Post.find(params[:id])
 		end

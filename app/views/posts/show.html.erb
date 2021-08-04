@@ -1,3 +1,17 @@
 <h1 class="text-center"><%= @post.title.capitalize %></h1>
 <br>
-<p class="text-justify"><%= @post.description %></p>
+<p class="text-justify"><%= @post.description %></p><br>
+<%= form_for @order do |f|%>
+<div class="mb-3 d-flex align-items-center col-md-8">
+    <div class="col-md-4">
+      <%= number_field_tag "order[qty]", min: 20, class: 'form-control', id: "cases_offer"%>
+    </div>
+    <div class=m-2>Cases</div>
+    <%= hidden_field_tag "order[purpose]", "Order", class: 'form-control', display: 'none' %>
+    <div class="col-md-4">
+      <%= f.submit "Order Request", class: "btn btn-primary btn-shadow d-block w-100" do%>
+        <i class="ci-cart fs-lg me-2"></i>
+        <% end %>
+    </div>
+</div>
+<% end %>
